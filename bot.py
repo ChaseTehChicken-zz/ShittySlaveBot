@@ -1,11 +1,15 @@
 import discord
 import random
 import os
+import json
+import config
+import logging
 from discord.ext import commands
 from discord.ext import tasks
 from itertools import cycle
 
 client = commands.Bot(command_prefix = "slave.")
+logging.basicConfig(level=logging.INFO)
 status = cycle(['Currently searching for toilet paper',
     'Coles has no toilet paper',
     'Woolworths has no toilet paper',
@@ -13,18 +17,26 @@ status = cycle(['Currently searching for toilet paper',
     'Toilet Paper wont save you from Coronavirus smh',
     'How am I supposed to wipe my fuckin arse??'])
 
-
+version = "0.3"
+dpyVersion = discord.__version__
+serverCount = len(client.guilds)
+memberCount = len(set(client.get_all_members()))
 
 @client.event
 async def on_ready():
     change_status.start()
-    print('logged in as')
+    print('logged in as') 
     print(client.user.name)
     print(client.user.id)
+    
+
 
 @client.event
 async def on_command_error(ctx, error):
-    pass
+    if ctx.author.id == 420454043593342977:
+        await ctx.channel.send("You done did fucked up chaseyy")
+    else:
+        await ctx.channel.send("Oh shit! I've had an error! Please try again or alert @Chaseyy#9999!")
 
 @tasks.loop(seconds=600)
 async def change_status():
@@ -32,7 +44,28 @@ async def change_status():
 
 @client.command()
 async def load(ctx, extension):
-    client.load_extension(f'cogs.{extension}')
+    client.load_extension(f'cogs.{extension}') 
+ 
+@client.command() 
+async def stats(ctx): 
+ 
+ 
+    embed = discord.Embed( 
+        title=f'{client.user.name} Stats',  
+        description="\uFEFF", 
+        colour=ctx.author.colour, 
+        timestamp=ctx.message.created_at) 
+ 
+    embed.add_field(name='Bot Version:', value=version)
+    embed.add_field(name='Discord.Py Version', value=dpyVersion)
+    embed.add_field(name='Total Guilds:', value=serverCount)
+    embed.add_field(name='Total Users:', value=memberCount)
+    embed.add_field(name='Bot Developers:', value="<@420454043593342977>")
+
+    embed.set_footer(text=f"Carpe Noctem | {client.user.name}")
+    embed.set_author(name=client.user.name, icon_url=client.user.avatar_url)
+
+    await ctx.send(embed=embed)
 
 
 @client.command(aliases=["purge"])
@@ -76,7 +109,7 @@ async def kick(ctx, member : discord.Member, *, reason=None):
 async def ban(ctx, member : discord.Member, *, reason=None):
     await member.ban(reason=reason)
     await ctx.send(f'successfully banned: {member} for reason: {reason}')
-
+    print(f'Member {member} banned with reason: {reason}')
 
 @client.command()
 @commands.has_permissions(manage_messages=True)
@@ -89,12 +122,11 @@ async def unban(ctx, *, member):
         if(user.name, user.discriminator) == (member_name, member_descriminator):
             await ctx.guild.unban(user)
             await ctx.send(f'Sucessfully unbanned {user}')
+            print(f'Member unbanned: {member}')
             return
-
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-
-client.run("NjgxNDA3NTMwMzQxMzY3ODA5.XmTVkg.P6mHlL47RQYEYfsU91_gm4t4rp8")
+client.run("NjgxNDA3NTMwMzQxMzY3ODA5.XnVeZw.FMjJ_KG0XsnzvDuqL2Yri31gC1Q")

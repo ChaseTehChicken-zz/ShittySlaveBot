@@ -6,7 +6,7 @@ class rank(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["perms"])
+    @commands.command(aliases=["perms", "role"])
     async def rank(self, ctx):
         if ctx.author.id == 420454043593342977:
             await ctx.send(f"Your rank is Bot Owner..\nHello Chaseyy")
