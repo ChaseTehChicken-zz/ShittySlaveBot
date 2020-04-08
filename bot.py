@@ -1,12 +1,14 @@
-import discord
-import random
-import os
-import json
-import config
-import logging
-from discord.ext import commands
-from discord.ext import tasks
-from itertools import cycle
+import discord 
+import random 
+import os 
+import json 
+import config 
+import logging 
+import nekos 
+import requests 
+from discord.ext import commands 
+from discord.ext import tasks 
+from itertools import cycle 
 
 client = commands.Bot(command_prefix = "slave.")
 logging.basicConfig(level=logging.INFO)
@@ -129,4 +131,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run("Token")
+client.run("NjgxNDA3NTMwMzQxMzY3ODA5.XohXDg.W-o4IRRV0miOaRZAPVyi3WPz5lY")
