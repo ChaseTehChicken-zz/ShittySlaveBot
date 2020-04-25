@@ -29,7 +29,7 @@ class cuddle(commands.Cog):
             await ctx.send(embed=embed)        
         else:
             embed = discord.Embed(
-            title=f'{ctx.author.name} cuddled {member}! How cute!')
+            title=f'{ctx.author.name} cuddled @{member}! How cute!')
             print(nameLower)
             
         embed.set_image(url=f"{hugg}")

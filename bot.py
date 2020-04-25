@@ -19,6 +19,10 @@ status = cycle(['Currently searching for toilet paper',
     'Toilet Paper wont save you from Coronavirus smh',
     'How am I supposed to wipe my fuckin arse??'])
 
+ffiles = [
+    discord.File('test.jpeg', 'test.jpeg')
+]
+
 version = "0.3"
 dpyVersion = discord.__version__
 serverCount = len(client.guilds)
@@ -32,13 +36,20 @@ async def on_ready():
     print(client.user.id)
     
 
-
 @client.event
 async def on_command_error(ctx, error):
     if ctx.author.id == 420454043593342977:
         await ctx.channel.send("You done did fucked up chaseyy")
     else:
         await ctx.channel.send("Oh shit! I've had an error! Please try again or alert @Chaseyy#9999!")
+
+############# TESTING AREA #############
+
+@client.command()
+async def testimage(ctx):
+    await ctx.send('file: ', file=discord.File('test.jpeg', 'img_lights.jpg'))
+
+#############  END TESTING #############
 
 @tasks.loop(seconds=600)
 async def change_status():
@@ -99,6 +110,7 @@ async def ping(ctx):
     await ctx.send(f'{round(client.latency * 1000)}ms')
 
 
+
 @client.command()
 @commands.has_permissions(manage_messages=True)
 async def kick(ctx, member : discord.Member, *, reason=None):
@@ -131,4 +143,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run("Token")
+client.run("NjgxNDA3NTMwMzQxMzY3ODA5.XqEyxg.TzloDGmJP5w8GKPiN_ZnTawYxN4")
