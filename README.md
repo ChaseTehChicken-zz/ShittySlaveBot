@@ -1,4 +1,9 @@
-# ShittySlaveBot
-My slave bot for discord. Mostly for my own use and fun. Also developed as a school project lol
+# Chaseyys Slave
 
-This is a  README.md. You will find nothing here. :thisisworthlessmeme:
+This is the source code for the custom bot on my discord server.
+Unlike my other bots I encourage you to steal this code and host it yourself. 
+
+---
+
+
+![Size](https://img.shields.io/github/repo-size/ChaseTehChicken/ShittySlaveBot)
